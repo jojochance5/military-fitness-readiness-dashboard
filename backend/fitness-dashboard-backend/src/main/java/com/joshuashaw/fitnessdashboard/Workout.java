@@ -7,6 +7,9 @@ public class Workout {
     private int situps;
     private String runTime;
 
+    public Workout() {
+    }
+
     public Workout(String date, int pushups, int situps, String runTime) {
         this.date = date;
         this.pushups = pushups;
