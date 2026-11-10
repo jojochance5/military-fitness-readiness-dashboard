@@ -1,17 +1,18 @@
 package com.joshuashaw.fitnessdashboard;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class WorkoutController {
 
-    @GetMapping("/workouts")
-    public List<Workout> getWorkouts() {
+    private final List<Workout> workouts = new ArrayList<>();
 
-        return List.of(
+    public WorkoutController() {
+
+        workouts.add(
                 new Workout(
                         "2026-10-30",
                         60,
@@ -19,5 +20,18 @@ public class WorkoutController {
                         "14:32"
                 )
         );
+    }
+
+    @GetMapping("/workouts")
+    public List<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    @PostMapping("/workouts")
+    public String addWorkout(@RequestBody Workout workout) {
+
+        workouts.add(workout);
+
+        return "Workout added successfully!";
     }
 }
